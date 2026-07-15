@@ -12,7 +12,7 @@ The device exposes five USB interfaces:
 | MI_01 | Unknown / auxiliary |
 | MI_02 | AT command serial port |
 | MI_03 | PPP dial-up serial port |
-| MI_04 | Diagnostic / private interface |
+| MI_04 | Windows supports internet port |
 
 ## Confirmed Hardware
 
@@ -36,29 +36,15 @@ AT+CPIN?
 AT+CEREG?
 ```
 
-### Qualcomm WWAN Driver
+### DJI Cellular Dongle 1 driver
 
-`MI_00` can be manually installed with the Qualcomm WWAN driver.
+`MI_04` can be manually installed with the DJI Cellular Dongle 1 driver.
 
-Windows recognizes:
+Windows recognizes:Quectel Wireless Ethernet Adapter
 
-```
-Qualcomm HS-USB WWAN Adapter
-```
+And it can be used as the Mobile data in Windows
 
-However:
-
-```
-netsh mbn show interfaces
-```
-
-returns:
-
-```
-There is no mobile broadband interface.
-```
-
-Therefore, native Windows Mobile Broadband is **not** currently available.
+Therefore, native Windows Mobile Broadband is currently available.
 
 ## PPP Dial-up
 

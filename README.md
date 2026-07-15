@@ -15,7 +15,7 @@ Experimental computer support and reverse-engineering notes for the DJI Cellular
 | Platform | Status |
 |---|---|
 | Linux | PPP connection working through USB serial |
-| Windows | AT serial and WWAN adapter detected; native MBN not working |
+| Windows | AT serial and WWAN adapter detected |
 | macOS | USB device detected; USB serial DriverKit support planned |
 
 ## Confirmed interfaces
@@ -25,7 +25,7 @@ Experimental computer support and reverse-engineering notes for the DJI Cellular
 | MI_00 | Qualcomm WWAN/QMI data interface candidate |
 | MI_02 | AT command port |
 | MI_03 | PPP dial-up port |
-| MI_04 | Diagnostic/private interface candidate |
+| MI_04 | Windows native Mobile data interface |
 
 ## Linux
 

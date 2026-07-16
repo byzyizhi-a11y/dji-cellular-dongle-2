@@ -92,4 +92,4 @@ At present, PPP over the serial interface is considered the most practical Windo
 
 ## Disclaimer
 
-This project is unofficial and is not affiliated with DJI, Fibocom or Microsoft.
+This project is unofficial and is not affiliated with DJI, Fibocom.

@@ -103,7 +103,11 @@ CONNECT
 - Native macOS Cellular integration is not implemented.
 - The initial goal is a working USB serial device and PPP connection.
 - This project is experimental and unofficial.
-
+## Tutorial
+1. Download "Bridge" and "connect.sh"
+2. Then open "Bridge" and Terminal
+3. Next enter `./connect.sh` in the terminal.
+4. Finally turn off Wi-Fi enjoy it!
 ## Disclaimer
 
 This project is not affiliated with DJI, Fibocom or Apple.

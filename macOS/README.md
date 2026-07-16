@@ -46,7 +46,7 @@ USB Interface MI_03
 USBSerialDriverKit
         │
         ▼
-/dev/cu.DJICellular2
+   /dev/ttyd001
         │
         ▼
 pppd

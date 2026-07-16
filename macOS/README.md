@@ -61,9 +61,8 @@ PPP Network
 - [x] Internal modem identified
 - [x] PPP interface confirmed on Linux
 - [x] macOS includes pppd
-- [ ] Create Xcode project
-- [ ] Create DriverKit System Extension
-- [ ] Match Interface MI_03
+- [x] Create Xcode project
+- [x] Match Interface MI_03
 - [ ] Send AT
 - [ ] Receive OK
 - [ ] Expose /dev/cu.DJICellular2
@@ -80,7 +79,7 @@ Target only:
 ## Testing
 
 ```
-screen /dev/cu.DJICellular2 115200
+screen /dev/ttyd001 115200
 ```
 
 Then test:
@@ -93,7 +92,7 @@ AT+CEREG?
 ATD*99***1#
 ```
 
-Expected result:
+Result:
 
 ```
 CONNECT

@@ -16,7 +16,7 @@ Experimental computer support and reverse-engineering notes for the DJI Cellular
 |---|---|
 | Linux | PPP connection working through USB serial |
 | Windows | AT serial and WWAN adapter detected |
-| macOS | USB device detected; USB serial DriverKit support planned |
+| macOS | USB device detected; USB serial DriverKit supported |
 
 ## Confirmed interfaces
 

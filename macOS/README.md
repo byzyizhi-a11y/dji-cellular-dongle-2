@@ -1,6 +1,6 @@
 # macOS Support
 
-This folder contains research and planned macOS support for the DJI Cellular Dongle 2.
+This folder contains research and  macOS supported for the DJI Cellular Dongle 2.
 
 ## Current Status
 

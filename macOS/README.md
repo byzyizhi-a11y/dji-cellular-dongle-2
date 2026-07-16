@@ -110,4 +110,4 @@ CONNECT
 4. Finally turn off Wi-Fi enjoy it!
 ## Disclaimer
 
-This project is not affiliated with DJI, Fibocom or Apple.
+This project is not affiliated with DJI, Fibocom.

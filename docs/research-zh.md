@@ -1,6 +1,6 @@
 # DJI Cellular Dongle 2（大疆 4G 模块 2 代）电脑使用研究记录
 
-更新时间：2026-07-15
+更新时间：2026-07-16
 
 ## 1. 研究对象
 
@@ -148,11 +148,11 @@ Bulk OUT     0x05
 
 | USB 接口 | 当前结论 | 可信度 |
 |---|---|---:|
-| MI_00 | Qualcomm 私有 WWAN/QMI 数据接口候选 | 高 |
+| MI_00 | Qualcomm 私有 WWAN/QMI 数据接口候选 | 中 |
 | MI_01 | 辅助串口/NMEA/Modem 类接口 | 中 |
 | MI_02 | AT 控制串口 | 已确认 |
 | MI_03 | PPP 拨号串口 | 已确认 |
-| MI_04 | 诊断/私有接口 | 中 |
+| MI_04 | windows手机网络接入点 | 已确认 |
 
 ## 5. Windows 研究结果
 
@@ -217,7 +217,16 @@ MediaType: Wireless WAN
 
 ### 5.3 Windows 可行方案
 
-优先方案：MI_03 + USB VCOM + Windows RAS/PPP。
+优先方案:MI_04 + Dongle 1 Driver
+
+```text
+MI_04
+→ Quectel Wireless Ethernet Adapter
+→ Windows原生手机网络接入口
+→ 可直接通过模块接入网络
+```
+
+备用方案：MI_03 + USB VCOM + Windows RAS/PPP。
 
 ```text
 MI_03
@@ -227,7 +236,7 @@ MI_03
 → Windows PPP/RAS
 ```
 
-该路线尚未在 Windows 完整完成，但 MI_03 的 PPP 拨号能力已在 Linux 中验证。
+该路线在 Windows 验证完成，同时 MI_03 的 PPP 拨号能力已在 Linux 中验证。
 
 ## 6. Ubuntu/Linux 研究结果
 
@@ -371,40 +380,7 @@ Interrupt IN 0x87
 8. 交给 `pppd`
 9. 拨号 `*99***1#`
 
-## 8. 为什么 Windows 原生“手机网络”比 PPP 难
-
-PPP 只需要：
-
-```text
-串口
-→ AT
-→ ATD*99***1#
-→ CONNECT
-→ PPP
-```
-
-Windows 原生移动宽带还要求：
-
-```text
-USB WWAN 驱动
-→ QMI/MBIM 控制面
-→ SIM 管理
-→ 运营商注册状态
-→ APN 管理
-→ WwanSvc
-→ MBN API
-→ 设置中的手机网络
-```
-
-目前已经实现的是：
-
-```text
-MI_00
-→ qcusbwwan.sys
-→ NDIS Wireless WAN Adapter
-```
-
-缺少的是 MBN/WWAN 控制层注册和管理。
+目前，macos的方案已经实现
 
 ## 9. 当前最实用的结论
 
@@ -421,40 +397,33 @@ option USB serial
 
 ### Windows
 
-最现实：
+已经可用：
 
 ```text
-MI_03
-→ USB VCOM
-→ 标准 Modem
-→ RAS/PPP
+MI_04
+→ Quectel Wireless Ethernet Adapter
+→ windows手机网络接入点
 ```
 
-原生手机网络仍需完整 Fibocom/DJI WWAN 驱动或进一步逆向。
 
 ### macOS
 
-可行但需开发：
-
+通过tty的串口成功上网
 ```text
-USBSerialDriverKit
-→ MI_03
-→ /dev/cu.*
-→ pppd
+MI_03
+/dev/ttyd001
+ppp拨号
 ```
-
-不需要实现完整 QMI，只要实现 USB 串口桥接即可。
+此方案与linux的路线相似，但出于macos与linux的天差地别，串口就废了本人的很长时间
 
 ## 10. 后续研究方向
 
-1. 完成 Windows MI_03 PPP/RAS 拨号
-2. 完成 macOS USBSerialDriverKit 最小驱动
-3. 查找或提取 Fibocom NL668 Windows 完整驱动包
-4. 研究 Qualcomm GobiNet/Fibocom Linux 专用驱动
-5. 抓取 DJI 遥控器/飞行器使用模块时的 USB 控制流量
-6. 分析 GTUSBMODE 30 的真实接口定义
-7. 确认 MI_01 和 MI_04 的准确用途
-8. 整理成 GitHub 项目，附 USB descriptor、INF 映射和系统适配说明
+1. 查找或提取 Fibocom NL668 Windows 完整驱动包
+2. 抓取 DJI 遥控器/飞行器使用模块时的 USB 控制流量
+3. 分析 GTUSBMODE 30 的真实接口定义
+4. 确认 MI_01 和 MI_00 的准确用途
+5. 完成Android对于模块的适配
+6. 整理成 GitHub 项目，附 USB descriptor、INF 映射和系统适配说明
 
 ## 11. 安全提示
 
@@ -482,4 +451,4 @@ AT+GTUSBMODE=<未知值>
 
 - AT 查询结果
 
-  ​                                                                                                                                                                                                         YUNFENG2232
+  ​                                                                                                                                                                                                            YUNFENG2232
